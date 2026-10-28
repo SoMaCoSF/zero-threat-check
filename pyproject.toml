@@ -1,0 +1,15 @@
+[project]
+name = "zero-threat-check"
+version = "0.1.0"
+description = "Offline known-threat checker skill with TUI and local dashboard"
+requires-python = ">=3.10"
+
+[project.scripts]
+zero-threat-check = "zero_threat_check.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
