@@ -1,8 +1,11 @@
 [project]
 name = "zero-threat-check"
-version = "0.1.0"
+version = "0.3.0"
 description = "Offline known-threat checker skill with TUI and local dashboard"
 requires-python = ">=3.10"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
 
 [project.scripts]
 zero-threat-check = "zero_threat_check.cli:main"
