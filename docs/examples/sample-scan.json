@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "scope": "/path/to/evidence",
+  "results": [
+    {
+      "reader": "android-face-cache",
+      "findings": [],
+      "gaps": ["path not present: data/system/users/0/faceunlock/cache"]
+    },
+    {
+      "reader": "ios-mdm",
+      "findings": [],
+      "gaps": ["no .mobileconfig or Profile files found in tree"]
+    },
+    {
+      "reader": "kev-inventory",
+      "matches": [],
+      "gaps": ["no cached kev.json — run 'zero-threat-check update' first"]
+    }
+  ],
+  "mandatory": "A clean result means no known indicators were found in the places checked. It does not mean the device is clean."
+}
