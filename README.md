@@ -2,49 +2,46 @@
 
 Offline, read-only known-threat checker for mercenary spyware indicators, CISA Known Exploited Vulnerabilities, hidden deleted-photo/Face Unlock caches, and pre-installed MDM/rogue-certificate fraud patterns.
 
-Designed as an **Agent Skill** that can be extended by harvesting capabilities from other security tools without rewriting the core.
-
 A clean result is never proof the device is safe.
 
-## Features
+## Features (implemented)
 
-- **Working readers**: Android Face Unlock hidden cache + iOS MDM/configuration profile
-- Offline IOC matching (planned)
-- CISA KEV cross-check (planned)
-- Structured JSON reports with evidence grades and gaps
+- **Android Face Unlock hidden cache** reader
+- **iOS MDM / configuration profile** reader
+- **iOS PhotoData/Thumbnails** deleted-photo cache reader
+- **CISA KEV inventory** cross-check (after `update`)
+- **Browser + host** shallow presence checks
+- Optional **YARA** stub (reports gap until engine + rules present)
+- Structured JSON reports with grades and gaps
 - Logging
-- TUI that can run real scans
-- Localhost dashboard (http://127.0.0.1:8765)
+- TUI and localhost dashboard
 - Extensible reader registry
+- Tests + CI
 
 ## Quick Start
 
 ```bash
 git clone https://github.com/SoMaCoSF/zero-threat-check.git
 cd zero-threat-check
-pip install -e .
+pip install -e ".[test]"
 zero-threat-check --describe
-zero-threat-check scan --phone /path/to/extracted/tree/or/backup
+zero-threat-check update              # cache CISA KEV
+zero-threat-check scan --phone /path/to/tree
 zero-threat-check tui
-zero-threat-check dashboard
+zero-threat-check dashboard           # http://127.0.0.1:8765
+pytest tests/ -q
 ```
 
 ## Project Layout
 
 ```
-skill/                  # Agent skill
+skill/references/     # priority-modules, kev, reporting, capability-harvest, …
 src/zero_threat_check/
-  readers/              # android_face_cache.py, ios_mdm.py
+  readers/            # android_face_cache, ios_mdm, ios_photo_cache, kev_inventory, browser_host, yara_stub
+  update.py           # explicit KEV fetch
   cli.py / tui.py / dashboard.py
-docs/                   # architecture, cli-usage, android-face-cache, …
+docs/ examples/ tests/ .github/workflows/
 ```
-
-## Key Docs
-
-- [docs/cli-usage.md](docs/cli-usage.md)
-- [docs/architecture.md](docs/architecture.md)
-- [docs/android-face-cache.md](docs/android-face-cache.md)
-- [skill/references/priority-modules.md](skill/references/priority-modules.md)
 
 ## Safety
 
