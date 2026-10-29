@@ -10,6 +10,7 @@ from .readers.ios_mdm import scan as scan_ios
 from .readers.ios_photo_cache import scan as scan_ios_photo
 from .readers.browser_host import scan as scan_browser
 from .readers.kev_inventory import scan as scan_kev
+from .readers.yara_stub import scan as scan_yara
 from .update import update_kev
 
 log = setup_logging()
@@ -35,6 +36,7 @@ def do_scan(args):
     results.append(scan_ios_photo(root))
     results.append(scan_browser(root))
     results.append(scan_kev())
+    results.append(scan_yara(root))
     return {
         "schema_version": "1.0",
         "scope": str(root),
